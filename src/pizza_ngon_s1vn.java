@@ -34,5 +34,18 @@ public class pizza_ngon_s1vn {
         System.out.print("\033[H\033[2J"); 
         System.out.flush(); 
     }
-
+    
+    private boolean validate_mobile(String mobile_no) {
+        // check if length of input is 10 digits
+        if(mobile_no.length()!=10)
+            return false;
+        else {
+        //check whether any character other than digits 0-9 is present in input
+            for(int i=0; i<mobile_no.length();i++) {
+                if (mobile_no.charAt(i)<48 || mobile_no.charAt(i)>57) {
+                return false;}
+            }
+        }
+        return true;
+    }
 }
