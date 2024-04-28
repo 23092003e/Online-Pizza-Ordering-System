@@ -13,7 +13,7 @@ public class pizza_ngon_s1vn {
 
     public pizza_ngon_s1vn() {
         menu = new ArrayList<Pizza>();
-        delivery_locations = "";
+        delivery_locations = "\n\t\t\t\t1.Thu Duc city\n\t\t\t\t2. District 1\n\t\t\t\t3.District 3\n\t\t\t\t4.District 9\n\t\t\t\t5.District 12\n\t\t\t\t6.Di An City\n\t\t\t\t7.District 5\n\t\t\t\t8.Binh Thanh District\n\t\t\t\t9.Go Vap District\n\t\t\t\t10.Phu Nhuan District";
     }
 
     public void accept_customer(String name, String address, int location, String mobile) {
@@ -48,4 +48,5 @@ public class pizza_ngon_s1vn {
         }
         return true;
     }
+
 }
