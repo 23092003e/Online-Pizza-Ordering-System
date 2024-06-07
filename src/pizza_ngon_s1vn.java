@@ -28,7 +28,7 @@ public class pizza_ngon_s1vn {
     public pizza_ngon_s1vn() {
         menu = new ArrayList<Pizza>();
         //location to order
-        delivery_locations = "\n\t\t\t\t1.Thu Duc\n\t\t\t\t2.Quan 1\n\t\t\t\t3.Quan 3\n\t\t\t\t4.Quan 9\n\t\t\t\t5.Quan 12\n\t\t\t\t6.Quan 5\n\t\t\t\t7.Go Vap\n\t\t\t\t8.Binh Thanh\n\t\t\t\t9.Tan Binh\n\t\t\t\t10.Phu Nhuan";
+        delivery_locations = "\n\t\t\t\t1.Quan Thu Duc\n\t\t\t\t2.Quan 1\n\t\t\t\t3.Quan 3\n\t\t\t\t4.Quan 9\n\t\t\t\t5.Quan Binh Thanh\n\t\t\t\t6.Quan Go Vap\n\t\t\t\t7.Quan 5\n\t\t\t\t8.Quan 12\n\t\t\t\t9.Quan 2\n\t\t\t\t10.Quan Phu Nhuan";
     }
 
     public void accept_customer(String name, String address, int location, String mobile) {
@@ -94,19 +94,20 @@ public class pizza_ngon_s1vn {
         Scanner sc = new Scanner(System.in);
         int customer_loc=0; 
         String name, addr,mobile;  
-        do{
+        do {
             System.out.print("\n\t\t\t\tEnter mobile number : ");      // input mobile number
             mobile = sc.next();
-            if(!validate_mobile(mobile))           // ask for mobile number again if the input is not correct
+            if(!validate_mobile(mobile))           //ask for mobile number again if the input is not correct
                 System.out.println("\n\t\t\t\tPlease enter a valid mobile number! ");
-        } while (validate_mobile(mobile)==false); // repeat the loop until a valid mobile number is entered
+        } while (validate_mobile(mobile)==false); //repeat the loop until a valid mobile number is entered
 
         if(customer_data.containsKey(mobile)) {
             customer cust = customer_data.get(mobile);
             name = cust.name;
             addr = cust.address;
-            System.out.println("\n\t\t\t\tMobile no. "+mobile+" is registered with us!");
-            System.out.println("\n\t\t\t\tName: "+name+"\n\t\t\t\tAddress: "+addr);
+
+            System.out.println("\n\t\t\t\tMobile no. " + mobile +" is registered with us!");
+            System.out.println("\n\t\t\t\tName: "+ name +"\n\t\t\t\tAddress: " + addr);
             
             int addr_choice=0;
             int choice_mismatch=0;
@@ -126,14 +127,15 @@ public class pizza_ngon_s1vn {
                 }
                 if(choice_mismatch==0)
                 {   if(addr_choice<1 || addr_choice>2)
-                    System.out.println("\n\t\t\t\tInvalid choice! Please enter again.");
+                    System.out.println("\n\t\t\t\t Invalid choice! Please enter again.");
                 }
-            }while(choice_mismatch==1 || addr_choice<1 || addr_choice>2);
+            } while(choice_mismatch == 1 || addr_choice < 1 || addr_choice > 2 );
             
     
-            if(addr_choice==1)         // user wants to keep the same registered address
+            if(addr_choice == 1)         // user wants to keep the same registered address
                 customer_loc=cust.location;
-            else if(addr_choice==2)   // user wants to enter a new address
+            else if
+                (addr_choice == 2)   // user wants to enter a new address
             {   clearScreen();
                 // show the available delivery locations
                 System.out.println("\n\t\t\t\tWe currently deliver to the following locations: ");
@@ -194,7 +196,7 @@ public class pizza_ngon_s1vn {
                             System.out.println("\n\t\t\t\tSorry! Enter your location again");
                     }
                     
-                }while(location_mismatch==1 || customer_loc >10 || customer_loc<1); // repeat loop until a valid location is entered
+                }while(location_mismatch == 1 || customer_loc > 10 || customer_loc < 1); // repeat loop until a valid location is entered
     
             sc.nextLine(); // to clear input buffer
             clearScreen();
@@ -310,28 +312,28 @@ public class pizza_ngon_s1vn {
     {
         Scanner sc= new Scanner(System.in);
     
-        int per_km_charge= 10;          // delivery charge per km
-        int per_km_time=2;              // delivery time per km
+        int per_km_charge = 10;          // delivery charge per km
+        int per_km_time =2;              // delivery time per km
     
         // calculate the shortest distance to customer's location
         double distance= shortest_dist(customer_loc);
     
         clearScreen();
     
-        double delivery_charge= distance*per_km_charge;  // calculate delivery charges
+        double delivery_charge = Math.max(30, distance * per_km_charge);  // calculate delivery charges (minimum charge is 30)
         
-        double estimated_time=(per_km_time*distance);   // calculate estimated time for delivery
+        double estimated_time= (per_km_time * distance);   // calculate estimated time for delivery
     
         double total_bill= delivery_charge;             // add delivery charges to bill amount
     
-        String nm=""; // a string to store ordered pizza names
+        String nm = ""; // a string to store ordered pizza names
         for(int i=0; i<pizza_choice.size(); i++) // iterate through the ordered pizzas list
         {
             // get the corresponding pizza object from the pizza code
             Pizza selected = menu.get(pizza_choice.get(i)-1);
     
             // add baking time for the pizza to the estimated time
-            estimated_time+= selected.time_req*qty.get(i);
+            estimated_time += selected.time_req*qty.get(i);
     
             // add pizza cost to the total bill according to size selected
             switch(sizes.get(i))
@@ -351,30 +353,31 @@ public class pizza_ngon_s1vn {
     
         }
         // display the bill
-    
-            System.out.println("\t\t\t\t\t____________________________________________________");
-            System.out.println("\t\t\t\t\t                                                    ");
-            System.out.println("\t\t\t\t\t                  PIZZA HUT BILL                    ");
-            System.out.println("\t\t\t\t\t                                                    ");
-            System.out.println("\t\t\t\t\t____________________________________________________");
-            System.out.println("\t\t\t\t\t                                                    ");
-            System.out.println("\t\t\t\t\t           Name the of pizzas ordered: "+nm+          "");
-            System.out.println("\t\t\t\t\t____________________________________________________");
-            System.out.println("\t\t\t\t\t                                                    ");
-            System.out.println("\t\t\t\t\t           Quantity of pizzas ordered= "+qty+         "");
-            System.out.println("\t\t\t\t\t____________________________________________________");
-            System.out.println("\t\t\t\t\t                                                    ");
-            System.out.println("\t\t\t\t\t           Distance calculated= " + distance + " km     ");
-            System.out.println("\t\t\t\t\t____________________________________________________");
-            System.out.println("\t\t\t\t\t                                                    ");
-            System.out.println("\t\t\t\t\t           Delivery Charge= Rs." + delivery_charge + "");
-            System.out.println("\t\t\t\t\t____________________________________________________");
-            System.out.println("\t\t\t\t\t                                                    ");
-            System.out.println("\t\t\t\t\t           Total bill amount= Rs." + total_bill  +   "");
-            System.out.println("\t\t\t\t\t____________________________________________________");
-            System.out.println("\t\t\t\t\t                                                    ");
-            System.out.println("\t\t\t\t\t              THANK YOU FOR ORDERING!               ");
-            System.out.println("\t\t\t\t\t____________________________________________________");
+
+        System.out.println("\t\t\t\t\t____________________________________________________");
+        System.out.println("\t\t\t\t\t                                                    ");
+        System.out.println("\t\t\t\t\t                  PIZZA HUT BILL                    ");
+        System.out.println("\t\t\t\t\t                                                    ");
+        System.out.println("\t\t\t\t\t____________________________________________________");
+        System.out.println("\t\t\t\t\t                                                    ");
+        System.out.println("\t\t\t\t\t           Name the of pizzas ordered: "+nm+          "");
+        System.out.println("\t\t\t\t\t____________________________________________________");
+        System.out.println("\t\t\t\t\t                                                    ");
+        System.out.println("\t\t\t\t\t           Quantity of pizzas ordered= "+qty+         "");
+        System.out.println("\t\t\t\t\t____________________________________________________");
+        System.out.println("\t\t\t\t\t                                                    ");
+        System.out.println("\t\t\t\t\t           Distance calculated= " + String.format("%.2f", distance) + " km     ");
+        System.out.println("\t\t\t\t\t____________________________________________________");
+        System.out.println("\t\t\t\t\t                                                    ");
+        System.out.println("\t\t\t\t\t           Delivery Charge= Rs." + String.format("%.2f", delivery_charge) + "");
+        System.out.println("\t\t\t\t\t____________________________________________________");
+        System.out.println("\t\t\t\t\t                                                    ");
+        System.out.println("\t\t\t\t\t           Total bill amount= Rs." + String.format("%.2f", total_bill)  +   "");
+        System.out.println("\t\t\t\t\t____________________________________________________");
+        System.out.println("\t\t\t\t\t                                                    ");
+        System.out.println("\t\t\t\t\t              THANK YOU FOR ORDERING!               ");
+        System.out.println("\t\t\t\t\t____________________________________________________");
+
        
         // ask for confirmation of the order
         System.out.print("\n\n\t\t\t\t\tDo you want to 1. Confirm or 2. Cancel your order? ");
@@ -402,17 +405,19 @@ public class pizza_ngon_s1vn {
         // graph represented using adjacency matrix
         double[][] adjMat = {
             
-            { 0   ,inf , 10.5 , inf , 6.3 , inf, inf, inf, inf, 8.1 },    //1 Kothrud : PizzaHut
-            { inf , 0  , 5    , inf , inf , 5  , inf, inf, inf, inf},	  //2 Aundh
-            { 10.5, 5  , 0    , inf , inf , 4  , inf, inf, inf, inf},	  //3 Baner	
-            {inf  , inf, inf  , 0   , 3.2 , inf, 9  , inf, 4.3, inf},     //4 camp
-            { 6.3 , inf, inf  , 3.2 , 0   , 6.1, inf, inf, 6.8, 7.4},     //5 deccan gymkhana
-            { inf , 5  , 4    , inf , 6.1 , 0  , 4.7, inf, inf, inf},     //6 kalyani nagar
-            { inf , inf, inf  , 6   , inf , 4.7, 0  , inf, inf, inf},     //7 koregaon park
-            { inf , inf, inf  , inf , inf , inf, inf, 0  , 5.6, 2.8},     //8 sinhagad road
-            { inf , inf, inf  , 4.3 , 6.8 , inf, inf, 5.6, 0  , inf},     //9 swargate
-            { 8.1 , inf, inf  , inf , 7.4 , inf, inf, 2.8, inf, 0}        //10 warje
-            }; 
+            { 0   ,inf , 10.5 , inf , 6.3 , inf, inf, inf, inf, 8.1 },    //1 Thủ Đức : pizza ngon s1vn
+            { inf , 0  , 5    , inf , inf , 5  , inf, inf, inf, inf},	  //2 Quận 1
+            { 10.5, 5  , 0    , inf , inf , 4  , inf, inf, inf, inf},	  //3 Quận 3
+            { inf  , inf, inf  , 0   , 3.2 , inf, 9  , inf, 4.3, inf},    //4 Quận 9
+            { 6.3 , inf, inf  , 3.2 , 0   , 6.1, inf, inf, 6.8, 7.4},     //5 Quận Bình Thạnh
+            { inf , 5  , 4    , inf , 6.1 , 0  , 4.7, inf, inf, inf},     //6 Quận Gò Vấp
+            { inf , inf, inf  , 6   , inf , 4.7, 0  , inf, inf, inf},     //7 Quận 5
+            { inf , inf, inf  , inf , inf , inf, inf, 0  , 5.6, 2.8},     //8 Quận 12
+            { inf , inf, inf  , 4.3 , 6.8 , inf, inf, 5.6, 0  , inf},     //9 Quận 2
+            { 8.1 , inf, inf  , inf , 7.4 , inf, inf, 2.8, inf, 0}        //10 Quận Phú Nhuận
+
+            }
+        ; 
         
         // create object of class Dijkstras_shortest_path    
         Dijkstras_Shortest_Path dijkstrasAlgorithm = new Dijkstras_Shortest_Path(10);
