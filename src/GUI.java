@@ -2,9 +2,11 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import javax.swing.border.EmptyBorder;
 
 public class GUI extends JFrame {
     private JPanel menuPanel;
+    private JPanel orderPanel;
 
     public GUI() {
         // Set the title of the window
@@ -36,6 +38,12 @@ public class GUI extends JFrame {
         orderButton.setBackground(new Color(255, 153, 51)); // Orange color
         orderButton.setForeground(Color.WHITE); // White text color
         orderButton.setBorderPainted(false); // Remove button border
+        orderButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                showOrderPanel();
+            }
+        });
         gbc.gridx = 0;
         gbc.gridy = 0;
         gbc.insets = new Insets(20, 20, 20, 20);
@@ -106,9 +114,76 @@ public class GUI extends JFrame {
             menuPanel.add(new JLabel(String.valueOf(largePrices[i])));
         }
 
-
         // Add the menu panel to the frame
         add(menuPanel, BorderLayout.CENTER);
+        revalidate();
+        repaint();
+    }
+
+    private void showOrderPanel() {
+        getContentPane().removeAll();
+        orderPanel = new JPanel();
+        orderPanel.setLayout(new GridBagLayout());
+        GridBagConstraints gbc = new GridBagConstraints();
+        gbc.insets = new Insets(10, 10, 10, 10);
+
+        // Tên
+        JLabel nameLabel = new JLabel("Tên:");
+        gbc.gridx = 0;
+        gbc.gridy = 0;
+        orderPanel.add(nameLabel, gbc);
+
+        JTextField nameField = new JTextField(20);
+        gbc.gridx = 1;
+        gbc.gridy = 0;
+        orderPanel.add(nameField, gbc);
+
+        // Số điện thoại
+        JLabel phoneLabel = new JLabel("Số điện thoại:");
+        gbc.gridx = 0;
+        gbc.gridy = 1;
+        orderPanel.add(phoneLabel, gbc);
+
+        JTextField phoneField = new JTextField(20);
+        gbc.gridx = 1;
+        gbc.gridy = 1;
+        orderPanel.add(phoneField, gbc);
+
+        // Quận
+        JLabel districtLabel = new JLabel("Quận:");
+        gbc.gridx = 0;
+        gbc.gridy = 2;
+        orderPanel.add(districtLabel, gbc);
+
+        String[] districts = {"Quận 1", "Quận 2", "Quận 3", "Quận 4", "Quận 5", "Quận 6", "Quận 7", "Quận 8", "Quận 9", "Quận 10", "Quận 11", "Quận 12"};
+        JComboBox<String> districtCombo = new JComboBox<>(districts);
+        gbc.gridx = 1;
+        gbc.gridy = 2;
+        orderPanel.add(districtCombo, gbc);
+
+        // Nút "Đặt Hàng"
+        JButton orderButton = new JButton("Đặt Hàng");
+        orderButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                String name = nameField.getText();
+                String phone = phoneField.getText();
+                String district = (String) districtCombo.getSelectedItem();
+                // Xử lý đơn hàng tại đây
+                System.out.println("Tên: " + name);
+                System.out.println("Số điện thoại: " + phone);
+                System.out.println("Quận: " + district);
+            }
+        });
+        gbc.gridx = 1;
+        gbc.gridy = 3;
+        gbc.anchor = GridBagConstraints.EAST;
+        orderPanel.add(orderButton, gbc);
+
+        orderPanel.setBorder(new EmptyBorder(20, 20, 20, 20));
+
+        // Add the order panel to the frame
+        add(orderPanel, BorderLayout.CENTER);
         revalidate();
         repaint();
     }
@@ -117,3 +192,4 @@ public class GUI extends JFrame {
         GUI gui = new GUI();
     }
 }
+
