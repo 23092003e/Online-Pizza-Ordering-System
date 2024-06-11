@@ -28,7 +28,7 @@ public class pizza_ngon_s1vn {
     public pizza_ngon_s1vn() {
         menu = new ArrayList<Pizza>();
         //location to order
-        delivery_locations = "\n\t\t\t\t1.Quan Thu Duc\n\t\t\t\t2.Quan 1\n\t\t\t\t3.Quan 3\n\t\t\t\t4.Quan 9\n\t\t\t\t5.Quan Binh Thanh\n\t\t\t\t6.Quan Go Vap\n\t\t\t\t7.Quan 5\n\t\t\t\t8.Quan 12\n\t\t\t\t9.Quan 2\n\t\t\t\t10.Quan Phu Nhuan";
+        delivery_locations = "\n\t\t\t\t1.Quan Thu Duc (Pizza Shop)\n\t\t\t\t2.Quan 1\n\t\t\t\t3.Quan 3\n\t\t\t\t4.Quan 9\n\t\t\t\t5.Quan Binh Thanh\n\t\t\t\t6.Quan Go Vap\n\t\t\t\t7.Quan 5\n\t\t\t\t8.Quan 12\n\t\t\t\t9.Quan 2\n\t\t\t\t10.Quan Phu Nhuan";
     }
 
     public void accept_customer(String name, String address, int location, String mobile) {
