@@ -356,7 +356,7 @@ public class pizza_ngon_s1vn {
 
         System.out.println("\t\t\t\t\t____________________________________________________");
         System.out.println("\t\t\t\t\t                                                    ");
-        System.out.println("\t\t\t\t\t                  PIZZA HUT BILL                    ");
+        System.out.println("\t\t\t\t\t                  PIZZA NGON S1VN                   ");
         System.out.println("\t\t\t\t\t                                                    ");
         System.out.println("\t\t\t\t\t____________________________________________________");
         System.out.println("\t\t\t\t\t                                                    ");

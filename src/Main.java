@@ -2,7 +2,7 @@ import java.util.*;
 public class Main{
     public static void main(String[] args)
     {
-        pizza_ngon_s1vn ph= new pizza_ngon_s1vn();                       // create object of PizzaHut class
+        pizza_ngon_s1vn ph= new pizza_ngon_s1vn();  
         Scanner sc = new Scanner(System.in);
         int choice=0;
 
